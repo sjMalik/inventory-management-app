@@ -1,0 +1,37 @@
+[
+    {
+        "email": "admin@gmail.com",
+        "password": "$2a$10$gHx.59e87GOL7r8GOCnLqeQGB.Ihi5DCKvuVTd5GXwgfaW5ZAc.We",
+        "first_name": "John",
+        "last_name": "Doe",
+        "role": "ADMIN"
+    },
+    {
+        "email": "purchase.manager@gmail.com",
+        "password": "$2a$10$NvIh.8CvXm1yVkC7wYCdcelJlNw3QKk8dOiAKByCYnugAr1Pvt5Vq",
+        "first_name": "Purchase",
+        "last_name": "Manager",
+        "role": "PURCHASING_MANAGER"
+    },
+    {
+        "email": "supplier@gmail.com",
+        "password": "$2a$10$VVRtfatKEh9KaXfrBpZpae.boQND8XAPAnAXvm8Zo1zlwo/YhNjpW",
+        "first_name": "Supplier",
+        "last_name": "User",
+        "role": "SUPPLIER"
+    },
+    {
+        "email": "sales.manager@gmail.com",
+        "password": "$2a$10$RIWRbfwUYWbgWnzElTebCOEZmILFsR8MhGxd9YhD4hbM9l4SYW8Z6",
+        "first_name": "Sales",
+        "last_name": "Manager",
+        "role": "SALES_MANAGER"
+    },
+    {
+        "email": "customer@gmail.com",
+        "password": "$2a$10$dZfpM.mo7u6Mf4hFD7eaQeAlZQpd8/HvDHpb86nfu3Ol6eRX37IGi",
+        "first_name": "Customer",
+        "last_name": "User",
+        "role": "CUSTOMER"
+    }
+]
