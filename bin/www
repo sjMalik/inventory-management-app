@@ -5,8 +5,9 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('inventory-management-app:server');
 var http = require('http');
+const { dbEmitter } = require('../database/connection'); // Import event emitter
+const logger = require('../src/helpers/logger');
 
 /**
  * Get port from environment and store in Express.
@@ -54,6 +55,8 @@ function normalizePort(val) {
  */
 
 function onError(error) {
+  logger.error(`[SERVER] Error: ${error.message}`);
+
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -67,15 +70,26 @@ function onError(error) {
     case 'EACCES':
       console.error(bind + ' requires elevated privileges');
       process.exit(1);
-      break;
     case 'EADDRINUSE':
       console.error(bind + ' is already in use');
       process.exit(1);
-      break;
     default:
       throw error;
   }
 }
+
+// Listen for database connection events
+dbEmitter.on('connected', () => {
+  logger.info('[EVENT] Database connection established');
+});
+
+dbEmitter.on('disconnected', () => {
+  logger.warn('[EVENT] Database connection lost');
+});
+
+dbEmitter.on('error', (error) => {
+  logger.error(`[EVENT] Database error: ${error.message}`);
+});
 
 /**
  * Event listener for HTTP server "listening" event.
@@ -86,5 +100,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  logger.info(`[SERVER] Listening on ${bind}`);
 }
