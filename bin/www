@@ -5,8 +5,9 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('inventory-management-app:server');
 var http = require('http');
+const logger = require('../src/helpers/logger');
+const {dbEmitter} = require('../database/connection');
 
 /**
  * Get port from environment and store in Express.
@@ -54,6 +55,7 @@ function normalizePort(val) {
  */
 
 function onError(error) {
+  logger.error('Error in server', error);
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -77,6 +79,15 @@ function onError(error) {
   }
 }
 
+// Listen for database connection
+dbEmitter.on('connected', () => {
+  logger.info('[EVENT] Database connected');
+});
+
+dbEmitter.on('disconnected', () => {
+  logger.info('[EVENT] Database disconnected');
+});
+
 /**
  * Event listener for HTTP server "listening" event.
  */
@@ -86,5 +97,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  logger.info('Listening on ' + bind);
 }

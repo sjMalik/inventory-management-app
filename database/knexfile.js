@@ -7,14 +7,14 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: `postgres://postgres:mysecretpassword@localhost/inventory-management`,
+    connection: `postgres://postgres:mysecretpassword@localhost/inventory`,
   },
 
   staging: {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'username',
+      user: 'username',
       password: 'password'
     },
     pool: {
@@ -30,7 +30,7 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'username',
+      user: 'username',
       password: 'password'
     },
     pool: {
