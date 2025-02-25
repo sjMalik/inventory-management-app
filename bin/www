@@ -55,7 +55,7 @@ function normalizePort(val) {
  */
 
 function onError(error) {
-  logger.error('Error in server', error);
+  logger.error('[ERROR] Error in server', error);
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -97,5 +97,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  logger.info('Listening on ' + bind);
+  logger.info('[SERVER] Listening on ' + bind);
 }
