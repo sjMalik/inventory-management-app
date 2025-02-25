@@ -21,7 +21,6 @@ db.raw('SELECT 1+1 as result').then(() => {
     logger.info('[DATABASE] connection established');
 }).catch(err => {
     logger.error('[DATABASE] connection failed');
-    logger.error(err);
     dbEmitter.emit('disconnected');
 });
 
