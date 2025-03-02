@@ -128,3 +128,52 @@ paths:
                   message:
                     type: string
                     example: "Invalid credentials"
+
+  /products:
+    get:
+      summary: Get all products with pagination, filtering, and search
+      tags:
+        - Products
+      responses:
+        "200":
+          description: List of products retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        "500":
+          description: Internal server error
+
+    post:
+      summary: Create a new product (Admin & Purchasing Manager only)
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Smartphone"
+                description:
+                  type: string
+                  example: "Latest model with high battery backup"
+                price:
+                  type: number
+                  format: float
+                  example: 799.99
+                stock_quantity:
+                  type: integer
+                  example: 50
+                status:
+                  type: string
+                  enum: [ACTIVE, INACTIVE]
+                  example: "ACTIVE"
+      responses:
+        "201":
+          description: Product created successfully
+        "500":
+          description: Internal server error
