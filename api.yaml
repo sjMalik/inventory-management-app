@@ -8,6 +8,13 @@ servers:
   - url: http://localhost:3000/api/v1
     description: Local Development Server
 
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
 paths:
   /auth/register:
     post:
@@ -134,6 +141,8 @@ paths:
       summary: Get all products with pagination, filtering, and search
       tags:
         - Products
+      security:
+        - BearerAuth: []
       responses:
         "200":
           description: List of products retrieved successfully
@@ -148,6 +157,8 @@ paths:
       summary: Create a new product (Admin & Purchasing Manager only)
       tags:
         - Products
+      security:
+        - BearerAuth: []
       requestBody:
         required: true
         content:
