@@ -9,10 +9,13 @@ const errorHandler = require('./src/middleware/error.middleware');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./api.yaml');
+const logger = require('./src/helpers/logger');
+const redisClient = require('./database/redis');
 
 var app = express();
 
 app.use(express.json());
+app.use(logger.requestLogger);
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
