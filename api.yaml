@@ -470,3 +470,188 @@ paths:
                   message:
                     type: string
                     example: "Internal server error."
+
+  /purchase-orders:
+    post:
+      tags:
+        - Purchase Orders
+      summary: Create a new purchase order
+      description: Accessible by roles - ADMIN, PURCHASING_MANAGER
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                supplier_id:
+                  type: integer
+                  example: 1
+                product_id:
+                  type: integer
+                  example: 2
+                quantity:
+                  type: integer
+                  example: 10
+                price:
+                    type: number
+                    format: float
+                    example: 10.5
+                status:
+                  type: string
+                  enum: [PENDING_SUPPLIER_CONFIRMATION, CONFIRMED_BY_SUPPLIER, DELIVERED_BY_SUPPLIER]
+                  example: "PENDING_SUPPLIER_CONFIRMATION"
+      responses:
+        '201':
+          description: Purchase order created successfully
+        '400':
+          description: Invalid input
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+
+    get:
+      tags:
+        - Purchase Orders
+      summary: Retrieve all purchase orders
+      description: Accessible by authenticated users
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: A list of purchase orders
+        '401':
+          description: Unauthorized
+
+    
+  /purchase-orders/{id}:
+    get:
+      tags:
+        - Purchase Orders
+      summary: Retrieve a specific purchase order by ID
+      description: Accessible by authenticated users
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the purchase order to retrieve
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A single purchase order
+        '404':
+          description: Purchase order not found
+        '401':
+          description: Unauthorized
+
+    put:
+      tags:
+        - Purchase Orders
+      summary: Update a purchase order by ID
+      description: Accessible by roles - ADMIN, PURCHASING_MANAGER
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the purchase order to update
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                supplier_id:
+                  type: integer
+                  example: 1
+                product_id:
+                  type: integer
+                  example: 2
+                quantity:
+                  type: integer
+                  example: 10
+                price:
+                    type: number
+                    format: float
+                    example: 10.5
+                status:
+                  type: string
+                  enum: [PENDING_SUPPLIER_CONFIRMATION, CONFIRMED_BY_SUPPLIER, DELIVERED_BY_SUPPLIER]
+                  example: "PENDING_SUPPLIER_CONFIRMATION"
+      responses:
+        '200':
+          description: Purchase order updated successfully
+        '400':
+          description: Invalid input
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+
+    delete:
+      tags:
+        - Purchase Orders
+      summary: Delete a purchase order by ID
+      description: Accessible by roles - ADMIN, PURCHASING_MANAGER
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the purchase order to delete
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Purchase order deleted successfully
+        '404':
+          description: Purchase order not found
+        '401':
+          description: Unauthorized
+
+  /purchase-orders/{id}/status:
+    patch:
+      tags:
+        - Purchase Orders
+      summary: Update the status of a purchase order by ID
+      description: Accessible by roles - ADMIN, PURCHASING_MANAGER
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the purchase order to update the status for
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: [PENDING, APPROVED, REJECTED]
+                  example: "APPROVED"
+      responses:
+        '200':
+          description: Purchase order status updated successfully
+        '400':
+          description: Invalid input
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
