@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Kilogram",
+        "abbreviation": "kg"
+    },
+    {
+        "name": "Gram",
+        "abbreviation": "g"
+    },
+    {
+        "name": "Liter",
+        "abbreviation": "l"
+    },
+    {
+        "name": "Milliliter",
+        "abbreviation": "ml"
+    },
+    {
+        "name": "Piece",
+        "abbreviation": "pc"
+    },
+    {
+        "name": "Box",
+        "abbreviation": "box"
+    }
+]

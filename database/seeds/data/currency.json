@@ -1,0 +1,27 @@
+[
+    {
+        "code": "USD",
+        "name": "United States Dollar",
+        "exchange_rate": 1.000000
+    },
+    {
+        "code": "EUR",
+        "name": "Euro",
+        "exchange_rate": 0.850000
+    },
+    {
+        "code": "GBP",
+        "name": "British Pound",
+        "exchange_rate": 0.750000
+    },
+    {
+        "code": "INR",
+        "name": "Indian Rupee",
+        "exchange_rate": 74.500000
+    },
+    {
+        "code": "JPY",
+        "name": "Japanese Yen",
+        "exchange_rate": 110.000000
+    }
+]

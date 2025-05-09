@@ -655,3 +655,223 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
+
+  /sales-orders:
+    post:
+      tags:
+        - Sales Orders
+      summary: Create a new sales order
+      description: Accessible by roles - ADMIN, PURCHASING_MANAGER
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                buyer_id:
+                  type: integer
+                  example: 1
+                currency_id:
+                  type: integer
+                  example: 2
+                notes:
+                  type: string
+                  example: "Urgent delivery required"
+                terms:
+                  type: string
+                  example: "Net 30 days"
+                status:
+                  type: string
+                  enum: [PENDING, APPROVED, REJECTED]
+                  example: "PENDING"
+                sales_items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      product_id:
+                        type: integer
+                        example: 101
+                      quantity:
+                        type: integer
+                        example: 5
+                      rate:
+                        type: number
+                        format: float
+                        example: 20.5
+                      unit_id:
+                        type: integer
+                        example: 3
+      responses:
+        '201':
+          description: Sales order created successfully
+        '400':
+          description: Invalid input
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+
+    get:
+      tags:
+        - Sales Orders
+      summary: Retrieve all sales orders
+      description: Accessible by authenticated users
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: A list of sales orders
+        '401':
+          description: Unauthorized
+
+  /sales-orders/{id}:
+    get:
+      tags:
+        - Sales Orders
+      summary: Retrieve a specific sales order by ID
+      description: Accessible by authenticated users
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the sales order to retrieve
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A single sales order
+        '404':
+          description: Sales order not found
+        '401':
+          description: Unauthorized
+
+    put:
+      tags:
+        - Sales Orders
+      summary: Update a sales order by ID
+      description: Accessible by roles - ADMIN, PURCHASING_MANAGER
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the sales order to update
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                buyer_id:
+                  type: integer
+                  example: 1
+                currency_id:
+                  type: integer
+                  example: 2
+                notes:
+                  type: string
+                  example: "Updated delivery instructions"
+                terms:
+                  type: string
+                  example: "Net 45 days"
+                status:
+                  type: string
+                  enum: [PENDING, APPROVED, REJECTED]
+                  example: "APPROVED"
+                sales_items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      product_id:
+                        type: integer
+                        example: 101
+                      quantity:
+                        type: integer
+                        example: 10
+                      rate:
+                        type: number
+                        format: float
+                        example: 25.0
+                      unit_id:
+                        type: integer
+                        example: 3
+      responses:
+        '200':
+          description: Sales order updated successfully
+        '400':
+          description: Invalid input
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+
+    delete:
+      tags:
+        - Sales Orders
+      summary: Delete a sales order by ID
+      description: Accessible by roles - ADMIN
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the sales order to delete
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Sales order deleted successfully
+        '404':
+          description: Sales order not found
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+
+  /sales-orders/{id}/status:
+    patch:
+      tags:
+        - Sales Orders
+      summary: Update the status of a sales order by ID
+      description: Accessible by roles - ADMIN, PURCHASING_MANAGER
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the sales order to update the status for
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: [PENDING, APPROVED, REJECTED]
+                  example: "APPROVED"
+      responses:
+        '200':
+          description: Sales order status updated successfully
+        '400':
+          description: Invalid input
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
