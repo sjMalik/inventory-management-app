@@ -8,7 +8,8 @@ class DatabaseEmitter extends EventEmitter { }
 const dbEmitter = new DatabaseEmitter();
 
 // Create a new knex instance
-const db = knex(knexConfig[process.env.NODE_ENV || 'development']);
+const env = process.env.NODE_ENV || 'development';
+const db = knex(knexConfig[env.trim()]);
 
 // Handle database disconnects
 db.client.pool.on('destroy', () => {

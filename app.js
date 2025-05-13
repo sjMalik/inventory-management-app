@@ -20,6 +20,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// add health check
+app.get('/healthz', (req, res) => {
+    res.status(200).json({ status: 'OK' });
+});
+
 // Swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

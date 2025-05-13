@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "SET DEBUG=inventory-management-app:* & nodemon ./bin/www"
+    "start": "SET NODE_ENV=production & SET DEBUG=inventory-management-app:* & nodemon ./bin/www"
   },
   "dependencies": {
     "and": "^0.0.3",
