@@ -6,6 +6,8 @@ info:
 
 servers:
   - url: https://inventory-management-app-mcfk.onrender.com/api/v1
+    description: Production Server
+  - url: http://localhost:3000/api/v1
     description: Local Development Server
 
 components:
