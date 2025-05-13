@@ -4,10 +4,10 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var app = require('./app');
 var http = require('http');
-const logger = require('../src/helpers/logger');
-const {dbEmitter} = require('../database/connection');
+const logger = require('./src/helpers/logger');
+const {dbEmitter} = require('./database/connection');
 
 /**
  * Get port from environment and store in Express.
